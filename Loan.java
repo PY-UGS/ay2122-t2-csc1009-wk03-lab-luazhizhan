@@ -51,25 +51,9 @@ public class Loan {
     }
 
     public double getMonthlyPayment() {
-        double annualRate = getAnnualInterestRate() / 100;
-
-        // Monthly interest rate
-        // is the yearly rate divided by 12
-
-        double monthlyInterestRate = annualRate / 12.0;
-
-        // The length of the term in months
-        // is the number of years times 12
-
-        // int termInMonths = this.numberOfYears * 12;
-        double loanAmount = this.loanAmount;
-        int years = this.numberOfYears;
-        // The Math.pow() method is used calculate values raised to a power
-
-        double monthlyPayment = (loanAmount * monthlyInterestRate)
-                / (1 - (Math.pow(1 + monthlyInterestRate, (years * -12))));
-
-        return monthlyPayment;
+        double monthlyInterestRate = this.annualInterestRate / 100 / 12.0;
+        return (this.loanAmount * monthlyInterestRate)
+                / (1 - Math.pow(1 + monthlyInterestRate, this.numberOfYears * -12));
     }
 
     public double getTotalPayment() {
